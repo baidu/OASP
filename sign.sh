@@ -7,29 +7,34 @@ then
 	exit
 fi
 
-# Remove existing signatures if exist
-if unzip -l $1 | grep -q "META-INF"
+# Remove old signatures
+if unzip -l $1 | grep -q "META-INF/"
 then
 	zip -dq $1 META-INF/*
 fi
-if unzip -l $1 | grep -q "IDSIG"
-then
-	zip -dq $1 IDSIG/*
-fi
 
-# Generate IDSIG
-echo "IDSIG signing..."
-jarsigner -tsa http://timestamp.digicert.com \
-	-keystore keystores/idsig.p12 -storepass passwd $1 id
+# Adding OASP certificate and url to the apk
+echo "Adding OASP certificate and url..."
 unzip -q $1 -d tmp
+mkdir -p tmp/OASP
+cp keys/oasp.cert url.txt tmp/OASP/
 cd tmp
-mv META-INF IDSIG
-zip -uq ../$1 IDSIG/*
+zip -uq ../$1 OASP/*
 cd ..
-zip -dq $1 META-INF/*
-rm -rf tmp
 
-# And the normal Android APK signature
+# Perform the normal Android APK signing
 echo "Normal APK signing..."
 jarsigner -tsa http://timestamp.digicert.com \
-	-keystore keystores/orig.p12 -storepass passwd $1 cert
+	-keystore keys/orig.p12 -storepass passwd $1 cert
+
+# OASP Signing
+echo "OASP signing..."
+unzip -q $1 META-INF/* -d tmp/
+openssl dgst -sha256 -sign keys/oasp.key -out tmp/META-INF/oasp.sig tmp/META-INF/MANIFEST.MF
+cd tmp
+zip -uq ../$1 META-INF/oasp.sig
+cd ..
+echo "OASP signed"
+
+# Clean up
+rm -rf tmp

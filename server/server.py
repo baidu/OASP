@@ -97,9 +97,9 @@ class Receiver(BaseHTTPRequestHandler):
         # Validation of the query
         try:
             if not validPkg(req["pkg"]) or not validVer(req["ver"]) \
-                    or not validSha256(req["hash"]) \
-                    or not validSha256(req["cert"]) \
-                    or not validSha256(req["idsig"]):
+                    or not validSha256(req["mf_hash"]) \
+                    or not validSha256(req["apk_cert"]) \
+                    or not validSha256(req["oasp_cert"]):
                 self.wfile.write(bytes('{"oasp_result":-3}', 'UTF-8'))
                 return
         except:
@@ -109,9 +109,9 @@ class Receiver(BaseHTTPRequestHandler):
 
         print("Package:\t" + req["pkg"])
         print("Version:\t" + str(req["ver"]))
-        print("SHA256:\t\t" + req["hash"])
-        print("Certificate:\t" + req["cert"])
-        print("IDSIG:\t\t" + req["idsig"])
+        print("SHA256:\t\t" + req["mf_hash"])
+        print("Certificate:\t" + req["apk_cert"])
+        print("IDSIG:\t\t" + req["oasp_cert"])
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
