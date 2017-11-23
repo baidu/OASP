@@ -273,7 +273,7 @@ public class OASPVerify {
 
     }
 
-    // Collect URL's HTTPS certificates
+	// Query OASP server for app status
     private class OASPRemoteCheck extends AsyncTask<Void, Void, OASPStatus> {
         @Override
         protected OASPStatus doInBackground(Void... params) {
@@ -307,7 +307,6 @@ public class OASPVerify {
                 in.close();
                 conn.disconnect();
 
-                // onPostExecute will consume the returned status
                 int status = (int) rst.get("oasp_result");
                 if (OASPStatus.contains(status)) {
                     return OASPStatus.fromInt(status);
