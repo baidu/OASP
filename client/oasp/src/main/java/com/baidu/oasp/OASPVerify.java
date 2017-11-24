@@ -204,7 +204,9 @@ public class OASPVerify {
                 return;
             }
 
+            //****************  Query OASP server for app status   ****************
             status = new OASPRemoteCheck().execute().get();
+
 
             //****************  APK whole file hash  ****************
             // We leave this in the very end because it's time consuming and we don't really
@@ -260,6 +262,7 @@ public class OASPVerify {
                 socket.connect(new InetSocketAddress(oasp_url.substring(8), 443), CON_TIMEOUT);
                 socket.startHandshake();
                 Certificate[] certs = socket.getSession().getPeerCertificates();
+                socket.close();
                 if (certs == null)
                     return false;
 
@@ -293,6 +296,7 @@ public class OASPVerify {
                 URL url = new URL(oasp_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setConnectTimeout(CON_TIMEOUT);
+                conn.setReadTimeout(CON_TIMEOUT);
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
                 conn.setRequestMethod("POST");
