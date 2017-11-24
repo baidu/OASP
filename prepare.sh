@@ -21,6 +21,10 @@ echo "https://oasp.your.domain" > url.txt
 
 # Generate OASP server key/cert
 # You don't need it if you have your own HTTPS server
+# Note that you have to install the cert into Android Credential Storage 
+#   in order to make HTTPS communications work. From Android 7 (Nougat),
+#   additional change must also be made to the client app: https://android-
+#   developers.googleblog.com/2016/07/changes-to-trusted-certificate.html
 openssl genrsa -out server/key.pem 4096
 openssl req -new -x509 -days 1024 -key server/key.pem -out server/cert.pem \
-    -subj "/C=US/ST=Sunnyvale/O=Demo/OU=Demo/CN=oasp.your.domain"
+	-config server/openssl.cnf -extensions v3_ca
