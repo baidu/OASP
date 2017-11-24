@@ -35,11 +35,12 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 public class OASPVerify {
-    private static final String OASP_CERT = "OASP/oasp.cert";
+    private static final String OASP_CERT = "META-INF-OASP/oasp.cert";
+    private static final String OASP_OLDCERT_DIR = "META-INF-OASP/OLD/";
+    private static final String OASP_URL = "META-INF-OASP/url.txt";
+
     private static final String OASP_SIGNATURE = "META-INF/oasp.sig";
-    private static final String OASP_OLDCERT_DIR = "OASP/OLD/";
     private static final String OASP_OLDSIG_DIR = "META-INF/OASP-OLD/";
-    private static final String OASP_URL = "OASP/url.txt";
     private static final String APK_MANIFEST = "META-INF/MANIFEST.MF";
 
     public OASPStatus status;   // OASP verification result

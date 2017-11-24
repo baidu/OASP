@@ -17,7 +17,7 @@ openssl req -new -x509 -sha256 -days 1024 -key keys/oasp.key \
 	-out keys/oasp.cert -subj "/CN=SampleOASPCert"
 
 # Prepare the OASP url
-echo "https://oasp.baidu.com" > url.txt
+echo "https://oasp.yourdomain.com" > url.txt
 
 # Generate OASP server key/cert
 # You don't need it if you have your own HTTPS server

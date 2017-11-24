@@ -16,10 +16,10 @@ fi
 # Adding OASP certificate and url to the apk
 echo "Adding OASP certificate and url..."
 unzip -q $1 -d tmp
-mkdir -p tmp/OASP
-cp keys/oasp.cert url.txt tmp/OASP/
+mkdir -p tmp/META-INF-OASP
+cp keys/oasp.cert url.txt tmp/META-INF-OASP/
 cd tmp
-zip -uq ../$1 OASP/*
+zip -uq ../$1 META-INF-OASP/*
 cd ..
 
 # Perform the normal Android APK signing
