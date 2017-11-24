@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.Signature;
@@ -42,6 +43,8 @@ public class OASPVerify {
     private static final String OASP_SIGNATURE = "META-INF/oasp.sig";
     private static final String OASP_OLDSIG_DIR = "META-INF/OASP-OLD/";
     private static final String APK_MANIFEST = "META-INF/MANIFEST.MF";
+
+    private static final int CON_TIMEOUT = 3000; // HTTPS connection timeout
 
     public OASPStatus status;   // OASP verification result
 
@@ -101,7 +104,6 @@ public class OASPVerify {
             messageDigest.reset();
             messageDigest.update(mf_bytes);
             mf_hash = convertToHex(messageDigest.digest());
-
 
             //****************  Collect and verify OASP certificate   ****************
             Signature sig = Signature.getInstance("SHA256withRSA");
@@ -254,7 +256,8 @@ public class OASPVerify {
             try {
                 // TODO: support self-defined ports instead of 443 only
                 SocketFactory factory = SSLSocketFactory.getDefault();
-                SSLSocket socket = (SSLSocket) factory.createSocket(oasp_url.substring(8), 443);
+                SSLSocket socket = (SSLSocket) factory.createSocket();
+                socket.connect(new InetSocketAddress(oasp_url.substring(8), 443), CON_TIMEOUT);
                 socket.startHandshake();
                 Certificate[] certs = socket.getSession().getPeerCertificates();
                 if (certs == null)
@@ -289,6 +292,7 @@ public class OASPVerify {
 
                 URL url = new URL(oasp_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setConnectTimeout(CON_TIMEOUT);
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
                 conn.setRequestMethod("POST");
