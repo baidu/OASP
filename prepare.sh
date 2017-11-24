@@ -17,10 +17,10 @@ openssl req -new -x509 -sha256 -days 1024 -key keys/oasp.key \
 	-out keys/oasp.cert -subj "/CN=SampleOASPCert"
 
 # Prepare the OASP url
-echo "https://oasp.yourdomain.com" > url.txt
+echo "https://oasp.your.domain" > url.txt
 
 # Generate OASP server key/cert
 # You don't need it if you have your own HTTPS server
 openssl genrsa -out server/key.pem 4096
 openssl req -new -x509 -days 1024 -key server/key.pem -out server/cert.pem \
-    -subj "/C=US/ST=Sunnyvale/O=Demo/OU=Demo/CN=oasp.yourdomain.com"
+    -subj "/C=US/ST=Sunnyvale/O=Demo/OU=Demo/CN=oasp.your.domain"
