@@ -54,32 +54,35 @@ public class MainActivity extends Activity {
     }
 
     private void dump(OASPVerify oaspInfo) {
-        Log.e("OASP", "========================================================");
-        Log.e("OASP", "App: " + oaspInfo.name);
-        Log.e("OASP", "Status: " + oaspInfo.status.name());
+        Log.d("OASP", "========================================================");
+        Log.d("OASP", "App: " + oaspInfo.name);
+        Log.d("OASP", "Status: " + oaspInfo.status.name());
 
-        Log.e("OASP", "Package: " + oaspInfo.pkg);
-        Log.e("OASP", "Path: " + oaspInfo.path);
-        Log.e("OASP", "Version: " + oaspInfo.version);
-        Log.e("OASP", "Version Code: " + oaspInfo.verCode);
-        Log.e("OASP", "Signing Cert: " + oaspInfo.apk_cert);
-        Log.e("OASP", "MF hash: " + oaspInfo.mf_hash);
-        Log.e("OASP", "OASP Cert: " + oaspInfo.oasp_cert);
-        Log.e("OASP", "OASP URL: " + oaspInfo.oasp_url);
-        Log.e("OASP", "APK hash: " + oaspInfo.hash);
+        Log.d("OASP", "Package: " + oaspInfo.pkg);
+        Log.d("OASP", "Path: " + oaspInfo.path);
+        Log.d("OASP", "Version: " + oaspInfo.version);
+        Log.d("OASP", "Version Code: " + oaspInfo.verCode);
+        Log.d("OASP", "Signing Cert: " + oaspInfo.apk_cert);
+        Log.d("OASP", "MF hash: " + oaspInfo.mf_hash);
+        if (oaspInfo.oasp_cert != null)
+            Log.d("OASP", "OASP Cert: " + oaspInfo.oasp_cert);
+        if (oaspInfo.oasp_url != null)
+            Log.d("OASP", "OASP URL: " + oaspInfo.oasp_url);
+        if (oaspInfo.hash != null)
+            Log.d("OASP", "APK hash: " + oaspInfo.hash);
 
         if (oaspInfo.oasp_url_certs != null) {
-            Log.e("OASP", "OASP URL Certs:");
+            Log.d("OASP", "OASP URL Certs:");
             for (String cert : oaspInfo.oasp_url_certs) {
-                Log.e("OASP", "    " + cert);
+                Log.d("OASP", "    " + cert);
             }
         }
         if (oaspInfo.oasp_old_certs != null) {
-            Log.e("OASP", "OASP Old Certs:");
+            Log.d("OASP", "OASP Old Certs:");
             for (String cert : oaspInfo.oasp_old_certs) {
-                Log.e("OASP", "    " + cert);
+                Log.d("OASP", "    " + cert);
             }
         }
-        Log.e("OASP", "========================================================");
+        Log.d("OASP", "========================================================");
     }
 }
