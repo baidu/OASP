@@ -30,6 +30,12 @@ This is an apk with a valid apk signature and a valid OASP signature. It also ha
 
 This is an apk with a valid apk signature and a valid OASP signature. However, it has an invalid OASP OLD signature. It cannot pass the OASP verification process of the OASP client. This mimics the situation where an attacker wants to update an App signed by OASP OLD to a malicious app signed by OASP, without actually being the owner of OASP OLD private key.
 
+### Running results
+
+Screenshots below demonstrate the expected results:
+
+![TestResult1](test_result_1.png)
+![TestResult2](test_result_2.png)
 
 ## Server-side Tests
 
