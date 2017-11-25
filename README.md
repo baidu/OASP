@@ -72,16 +72,20 @@ If you have your own cets/keys, please modify the script and place your certs/ke
 
 # Frequently Asked Questions
 
-Q: Is OASP simply using multiple cert/key to sign the APK?
+**Q: Is OASP simply using multiple cert/key to sign the APK?**
+
 A: No, OASP utilizes nested signing (normal APK signature -> OASP signature -> OASP server's HTTPS signature) to introduce extra layers of attestation and trust. Also, OASP brings in flexibility and ontime information exchange through the introduction of the OASP url.
 
-Q: How can the verifier know whom the OASP cert belongs to?
+**Q: How can the verifier know whom the OASP cert belongs to?**
+
 A: The verifier can attest the OASP cert through the OASP url.
 
-Q: Then how can the verifier know if the OASP url has been maliciously replaced?
+**Q: Then how can the verifier know if the OASP url has been maliciously replaced?**
+
 A: That's why we enforce the OASP url to be HTTPS. The verifier can log the HTTPS certificate for decision making (if the majority of the APKs sharing the same package name and version lead to the same HTTPS site, the verifier can safely treat the url as authentic) and forensic purpose (to track the minority that lead to different HTTPS sites).
 
-Q: Who can benefit from OASP?
+**Q: Who can benefit from OASP?**
+
 A: OASP is an open and collaborative security mechanism. Developers, security vendors, app stores, and device vendors -- all roles in the Android ecosystem can benefit from it. With OASP, developers can timely provide the app status information; security vendors can obtain a new repulation based malware detection factor; app stores can take down apps based on the ontime OASP status updates, and act as the OASP information hub; device vendors also gain an additional layer to verify app status, providing stronger protection for end users. In general, OASP aims to solve the private key leakage, product resale, certificate upgrade etc. problems, yet without introducing a new ecosystem central dependency.
 
 # License
