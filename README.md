@@ -51,23 +51,6 @@ If you have your own cets/keys, please modify the script and place your certs/ke
 3. Build the client app (or implement your own app using the "oasp" module in the provided client app), and install both sample.apk and client app on your device.
 4. Launch the OASP server by executing server.py. Make sure that the HTTPS certificate can be trusted by your device, then enjoy!
 
-
-# Demo
-
-(This demo belongs to OASP v0.1. I'll soon update it with a demo of OASP v0.2)
-
-![DemoGIF](demo.gif)
-
-The demo video illustrates how the client works on Android devices. Although the video was taken on Nexus 5 with Android 4.4, the client app should be able to be compatible with older/newer platforms. The OASP protocol itself has no requirement of the Android version.
-
-In this demo, the client scans over all installed apps. If one clicks on one of the apps, the client collects needed info and query the OASP server:
-1. If the candidate does not support OASP, the client will treat the candidate in the traditional way (for example using traditional antivirus fingerprint matching mechanisms).
-2. If the candidate supports OASP but not properly signed, the client will prompt alert.
-3. If the candidate is properly OASP signed and has valid OASP URL, the client will obtain the status code from the OASP server and make further decisions.
-
-Note that in the demo video, all the three "My Application" apps have the same apk signature. OASP plays a key role here to identify/differentiate them. 
-
-
 # License
 
 The code is under the BSD license. Please refer to the [LICENSE](LICENCE) file for details.

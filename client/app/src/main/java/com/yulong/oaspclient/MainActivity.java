@@ -34,6 +34,9 @@ public class MainActivity extends Activity {
         for (ApplicationInfo app : packages) {
             // Ignore system applications
             if ((app.flags & isSysApp) == 0) {
+                // Skip the demo app itself
+                if (app.packageName.equals(getApplicationContext().getPackageName()))
+                    continue;
                 OASPVerify oaspInfo = new OASPVerify(pm, app);
                 dump(oaspInfo);
                 appList.add(oaspInfo);

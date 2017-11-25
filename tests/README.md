@@ -6,13 +6,13 @@
 
 This is a compiled version of the OASP client app provided in this repo.
 
-### test0.apk
+### base.apk
 
 The baseline APK without OASP support.
 
 ### test1.apk
 
-This is an apk generated from the sign.sh script provided in this repo (based on test0.apk). It has a valid OASP signature. It can pass the OASP verification of the OASP client app provided in this repo.
+This is an apk with OASP signature based on the base.apk. It can pass the OASP verification of the OASP client app provided in this repo.
 
 ### test2.apk
 

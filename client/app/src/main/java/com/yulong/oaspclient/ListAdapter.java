@@ -81,7 +81,7 @@ class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
         // Case 6: not properly OASP signed
         else if (info.status == OASPStatus.CORRUPTED) {
-            tv.setText("[X] This app supports OASP but corrupted!");
+            tv.setText("[X] This app supports OASP but is corrupted!");
             tv.setTextColor(Color.RED);
         }
         // Case 7: the app does not support OASP at all
