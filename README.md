@@ -95,7 +95,7 @@ The code is under the BSD license. Please refer to the [LICENSE](LICENCE) file f
 
 # Contacts
 
-![Baidu X-Lab Logo](baidu_xlab.png)
+![BaiduXlabLogo](baidu_xlab.png)
 
 [Yulong Zhang](ylzhang@baidu.com)
 
