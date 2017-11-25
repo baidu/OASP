@@ -17,7 +17,7 @@ openssl req -new -x509 -sha256 -days 1024 -key keys/oasp.key \
 	-out keys/oasp.cert -subj "/CN=SampleOASPCert"
 
 # This step is to generate the old OASP key/cert pairs
-# If you already have old OASP keys/certs to upgrade from, place them here
+# If you already have existing old OASP keys/certs to upgrade from, place them in keys dir
 openssl genrsa -out keys/old1.key 4096
 openssl genrsa -out keys/old2.key 4096
 openssl req -new -x509 -sha256 -days 1024 -key keys/old1.key \
