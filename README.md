@@ -95,6 +95,8 @@ The code is under the BSD license. Please refer to the [LICENSE](LICENCE) file f
 
 # Contacts
 
+![Baidu X-Lab Logo](https://github.com/baidu/rust-sgx-sdk/blob/master/logo_25.png)
+
 [Yulong Zhang](ylzhang@baidu.com)
 
 [Lenx (Tao) Wei](lenx@baidu.com)
