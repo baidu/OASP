@@ -19,6 +19,15 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:fontFamily="monospace" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:paddingBottom="8dp"
+        android:textColor="@color/colorPrimary" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
