@@ -25,8 +25,8 @@ openssl req -new -x509 -sha256 -days 1024 -key keys/old1.key \
 openssl req -new -x509 -sha256 -days 1024 -key keys/old2.key \
 	-out keys/old2.cert -subj "/CN=SampleOldOASPCert2"
 
-# Prepare the OASP url
-echo "https://oasp.your.domain" > url.txt
+# Prepare the OASP info
+echo $'{\n  "version": 1,\n  "url": "https://oasp.your.domain"\n}' > oasp.json
 
 # Generate OASP server key/cert
 # You don't need it if you have your own HTTPS server

@@ -1,6 +1,5 @@
 package com.yulong.oaspclient;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,11 +14,9 @@ import java.util.ArrayList;
 
 class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private ArrayList<OASPVerify> OASPInfos;
-    private Context cxt;
 
-    public ListAdapter(ArrayList<OASPVerify> data, Context c) {
+    public ListAdapter(ArrayList<OASPVerify> data) {
         OASPInfos = data;
-        cxt = c;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -29,9 +26,9 @@ class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         private ViewHolder(LinearLayout layout) {
             super(layout);
-            title = (TextView) layout.findViewById(R.id.title);
-            body = (TextView) layout.findViewById(R.id.body);
-            status = (TextView) layout.findViewById(R.id.status);
+            title = layout.findViewById(R.id.title);
+            body = layout.findViewById(R.id.body);
+            status = layout.findViewById(R.id.status);
         }
     }
 

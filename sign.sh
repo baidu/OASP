@@ -17,11 +17,11 @@ then
 	zip -dq $1 META-INF-OASP/*
 fi
 
-# Adding OASP certificate and url to the apk
-echo "Adding OASP certificate and url..."
+# Adding OASP certificate and info json to the apk
+echo "Adding OASP certificate and info json..."
 unzip -q $1 -d tmp
 mkdir -p tmp/META-INF-OASP
-cp keys/oasp.cert url.txt tmp/META-INF-OASP/
+cp keys/oasp.cert oasp.json tmp/META-INF-OASP/
 cd tmp
 zip -uq ../$1 META-INF-OASP/*
 cd ..

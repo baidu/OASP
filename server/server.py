@@ -77,7 +77,7 @@ class Receiver(BaseHTTPRequestHandler):
     def do_POST(self):
         """ 
         POST handler =>
-            Input: App's pkg name, ver code, SHA256, apk certificate, IDSIG 
+            Input: App's pkg/ver/MF digest/cert, and OASP ver/cert 
             Output: OASP status code
         OASP Status Code:
             0: Redirect
@@ -96,22 +96,26 @@ class Receiver(BaseHTTPRequestHandler):
 
         # Validation of the query
         try:
-            if not validPkg(req["pkg"]) or not validVer(req["ver"]) \
-                    or not validSha256(req["mf_hash"]) \
-                    or not validSha256(req["apk_cert"]) \
-                    or not validSha256(req["oasp_cert"]):
+            if not validVer(req["oasp_ver"]) \
+                    or not validSha256(req["oasp_cert"])\
+                    or not validPkg(req["apk_pkg"]) \
+                    or not validVer(req["apk_ver"]) \
+                    or not validSha256(req["apk_mf_hash"]) \
+                    or not validSha256(req["apk_cert"]):
                 self.wfile.write(bytes('{"oasp_result":-3}', 'UTF-8'))
                 return
-        except:
+        except Exception as e:
             # If the query misses some field, we return Invalid too:
+            print(e)
             self.wfile.write(bytes('{"oasp_result":-3}', 'UTF-8'))
             return
 
-        print("Package:\t" + req["pkg"])
-        print("Version:\t" + str(req["ver"]))
-        print("SHA256:\t\t" + req["mf_hash"])
-        print("Certificate:\t" + req["apk_cert"])
-        print("IDSIG:\t\t" + req["oasp_cert"])
+        print("OASP Version: " + str(req["oasp_ver"]))
+        print("OASP Certificate: " + req["oasp_cert"])
+        print("APK Package: " + req["apk_pkg"])
+        print("APK Version: " + str(req["apk_ver"]))
+        print("APK MF SHA256: " + req["apk_mf_hash"])
+        print("APK Certificate: " + req["apk_cert"])
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
         self.end_headers()

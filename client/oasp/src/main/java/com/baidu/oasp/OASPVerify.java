@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.JsonReader;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -37,10 +38,9 @@ import javax.net.ssl.SSLSocketFactory;
 
 public class OASPVerify {
     private static final String OASP_CERT = "META-INF-OASP/oasp.cert";
-    private static final String OASP_OLDCERT_DIR = "META-INF-OASP/OLD/";
-    private static final String OASP_URL = "META-INF-OASP/url.txt";
-
+    private static final String OASP_INFO = "META-INF-OASP/oasp.json";
     private static final String OASP_SIGNATURE = "META-INF/oasp.sig";
+    private static final String OASP_OLDCERT_DIR = "META-INF-OASP/OLD/";
     private static final String OASP_OLDSIG_DIR = "META-INF/OASP-OLD/";
     private static final String APK_MANIFEST = "META-INF/MANIFEST.MF";
 
@@ -53,7 +53,7 @@ public class OASPVerify {
     public String path;         // APK path
     public Drawable icon;       // App icon
     public String version;      // App version
-    public int verCode;         // App version code
+    public int vercode;         // App version code
     public String apk_cert;         // APK signing certificates
     public String hash;         // APK whole file digest
     public String mf_hash;      // MANIFEST.MF file digest
@@ -66,6 +66,7 @@ public class OASPVerify {
     //   MF digest to match the exact signed version. When we do post request to OASP server
     //   to lookup the app status, we use MF digest.
 
+    public int oasp_ver;         // OASP signing version
     public String oasp_cert;    // OASP certificate
     public String oasp_url;     // URL of OASP remote server (must be HTTPS)
     public ArrayList<String> oasp_url_certs;    // HTTPS certificates of the OASP server
@@ -85,7 +86,7 @@ public class OASPVerify {
             path = app.sourceDir;
             PackageInfo pkgInfo = pm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
             version = pkgInfo.versionName;
-            verCode = pkgInfo.versionCode;
+            vercode = pkgInfo.versionCode;
 
 
             //****************  Obtain the signing certificates  ****************
@@ -142,22 +143,34 @@ public class OASPVerify {
             oasp_cert = convertToHex(messageDigest.digest());
 
 
-            //****************  Collect and verify OASP URL   ****************
-            jarEntry = jarFile.getJarEntry(OASP_URL);
+            //****************  Collect OASP info and verify OASP URL   ****************
+            jarEntry = jarFile.getJarEntry(OASP_INFO);
             if (jarEntry == null) {
-                Log.e("OASP", pkg + ": OASP URL not found");
+                Log.e("OASP", pkg + ": oasp.json not found");
                 status = OASPStatus.UNSUPPORTED;
                 return;
             }
-            BufferedReader r = new BufferedReader(new InputStreamReader(jarFile.getInputStream(jarEntry)));
-            String url_str = r.readLine();
-            if (!url_str.startsWith("https://")) {
-                Log.e("OASP", pkg + ": OASP URL is not in HTTPS");
+            InputStreamReader is = new InputStreamReader(jarFile.getInputStream(jarEntry), "UTF-8");
+            JsonReader reader = new JsonReader(is);
+            reader.beginObject();
+            while (reader.hasNext()) {
+                String name = reader.nextName();
+                if (name.equals("version")) {
+                    oasp_ver = reader.nextInt();
+                } else if (name.equals("url")) {
+                    oasp_url = reader.nextString();
+                } else {
+                    reader.skipValue();
+                }
+            }
+            reader.endObject();
+            is.close();
+            reader.close();
+            if (oasp_url == null || !oasp_url.startsWith("https://")) {
+                Log.e("OASP", pkg + ": No OASP URL or the URL is not in HTTPS");
                 status = OASPStatus.UNSUPPORTED;
                 return;
             }
-            oasp_url = url_str;
-
 
             //****************  Collect and verify OASP old certificates   ****************
             oasp_old_certs = new ArrayList<>();
@@ -287,9 +300,10 @@ public class OASPVerify {
             try {
                 // Now post the required info to the OASP server
                 JSONObject data = new JSONObject();
-                data.put("pkg", pkg);
-                data.put("ver", verCode);
-                data.put("mf_hash", mf_hash);
+                data.put("oasp_ver", oasp_ver);
+                data.put("apk_pkg", pkg);
+                data.put("apk_ver", vercode);
+                data.put("apk_mf_hash", mf_hash);
                 data.put("apk_cert", apk_cert);
                 data.put("oasp_cert", oasp_cert);
 

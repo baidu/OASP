@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
         });
 
         // Show it
-        RecyclerView.Adapter mAdapter = new ListAdapter(appList, this);
+        RecyclerView.Adapter mAdapter = new ListAdapter(appList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -61,12 +61,14 @@ public class MainActivity extends Activity {
         Log.d("OASP", "App: " + oaspInfo.name);
         Log.d("OASP", "Status: " + oaspInfo.status.name());
 
-        Log.d("OASP", "Package: " + oaspInfo.pkg);
-        Log.d("OASP", "Path: " + oaspInfo.path);
-        Log.d("OASP", "Version: " + oaspInfo.version);
-        Log.d("OASP", "Version Code: " + oaspInfo.verCode);
-        Log.d("OASP", "Signing Cert: " + oaspInfo.apk_cert);
-        Log.d("OASP", "MF hash: " + oaspInfo.mf_hash);
+        Log.d("OASP", "APK Package: " + oaspInfo.pkg);
+        Log.d("OASP", "APK Path: " + oaspInfo.path);
+        Log.d("OASP", "APK Version: " + oaspInfo.version);
+        Log.d("OASP", "APK Version Code: " + oaspInfo.vercode);
+        Log.d("OASP", "APK Signing Cert: " + oaspInfo.apk_cert);
+        Log.d("OASP", "APK MF hash: " + oaspInfo.mf_hash);
+        if (oaspInfo.oasp_ver != 0)
+            Log.d("OASP", "OASP Version: " + oaspInfo.oasp_ver);
         if (oaspInfo.oasp_cert != null)
             Log.d("OASP", "OASP Cert: " + oaspInfo.oasp_cert);
         if (oaspInfo.oasp_url != null)
