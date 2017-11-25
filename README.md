@@ -63,7 +63,7 @@ This directory contains test cases of the client and server. Please refer to the
 1. Execute prepare.sh to generate the needed certificates/keys. It by default generates:
   * keys/orig.p12: the cert/key used for the original apk signing
   * keys/oasp.cert/.key: the cert/key used for OASP signing
-  * keys/old1/2.cert/.key: old OASP certs/keys that can be upgraded from (optional)
+  * keys/old.cert/.key: old OASP cert/key that need be upgraded from (optional)
   * server/\*.pem: the cert/key used by the HTTPS server
 If you have your own cets/keys, please modify the script and place your certs/keys in the corresponding directories.
 2. Assume your apk is placed in this directory as "sample.apk", run ./sign.sh sample.apk to sign it.
