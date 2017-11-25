@@ -2,8 +2,8 @@
 
 if [ $# -ne 1 ]
 then
-    echo "Please specify the apk to be signed"
-    echo "Example: ./sign.sh sample.apk"
+    echo "Please specify the apk to be verified"
+    echo "Example: ./verify.sh sample.apk"
     exit
 fi
 

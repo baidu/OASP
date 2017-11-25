@@ -16,6 +16,15 @@ openssl genrsa -out keys/oasp.key 4096
 openssl req -new -x509 -sha256 -days 1024 -key keys/oasp.key \
 	-out keys/oasp.cert -subj "/CN=SampleOASPCert"
 
+# This step is to generate the old OASP key/cert pairs
+# If you already have old OASP keys/certs to upgrade from, place them here
+openssl genrsa -out keys/old1.key 4096
+openssl genrsa -out keys/old2.key 4096
+openssl req -new -x509 -sha256 -days 1024 -key keys/old1.key \
+	-out keys/old1.cert -subj "/CN=SampleOldOASPCert1"
+openssl req -new -x509 -sha256 -days 1024 -key keys/old2.key \
+	-out keys/old2.cert -subj "/CN=SampleOldOASPCert2"
+
 # Prepare the OASP url
 echo "https://oasp.your.domain" > url.txt
 
