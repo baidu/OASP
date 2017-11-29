@@ -1,6 +1,6 @@
 # Introduction
 
-App signature is the fundation of the Android ecosystem. App developers must never lose the signing certificate/key and keep them secretly. However, we can always see misuses/abuses/leakages of the signing certs. Therefore, a new signing scheme is needed to allow developers to migrate to new signing certs, or at least allow them to "tag" apps signed by lost certificates.
+App signature is the foundation of the Android ecosystem. App developers must never lose the signing certificate/key and keep them secretly. However, we can always see misuses/abuses/leakages of the signing certs. Therefore, a new signing scheme is needed to allow developers to migrate to new signing certs, or at least allow them to "tag" apps signed by lost certificates.
 
 So we proposed to add another layer of signature above the existing App signature. It's a nested signature that helps to identify/differentiate apps signed by the same installation signature. The new scheme is absolutely compatible with the existing App verification/installation process, and solves the headache of developers who have to switch to new signing certificate but can't.
 
@@ -17,7 +17,7 @@ This repo contains a reference/demo implementation of OASP. Both client and serv
 
 **client**
 
-This an Android app that scans over all installed apps. If an app supports OASP, it will collects necessary info (package name, version code, hash, App certificate, and OASP certificate, etc.) and consult OASP server for the app's status (whether it can be trusted or not). Details about building and running the client can be found inside the client directory.
+This an Android app that scans over all installed apps. If an app supports OASP, it will collect necessary info (package name, version code, hash, App certificate, and OASP certificate, etc.) and consult OASP server for the app's status (whether it can be trusted or not). Details about building and running the client can be found inside the client directory.
 
 We deliberately split the core OASP logic into a standalone module/library called "oasp". This makes it easy for other apps to integrate it.
 
@@ -35,7 +35,7 @@ This is the tool to sign the app using both the normal apk signature and the OAS
 
 **verify.sh**
 
-This is the commandline tool to quickly verify the OASP signature.
+This is the command line tool to quickly verify the OASP signature.
 
 **tests**
 
@@ -58,7 +58,7 @@ If you have your own cets/keys, please modify the script and place your certs/ke
 
 **Q: Is OASP simply using multiple cert/key to sign the APK?**
 
-A: No, OASP utilizes nested signing (normal APK signature -> OASP signature -> OASP server's HTTPS signature) to introduce extra layers of attestation and trust. Also, OASP brings in flexibility and ontime information exchange through the introduction of the OASP url.
+A: No, OASP utilizes nested signing (normal APK signature -> OASP signature -> OASP server's HTTPS signature) to introduce extra layers of attestation and trust. Also, OASP brings in flexibility and real-time information exchange through the introduction of the OASP url.
 
 **Q: How can the verifier know whom the OASP cert belongs to?**
 
@@ -70,7 +70,7 @@ A: That's why we enforce the OASP url to be HTTPS. The verifier can log the HTTP
 
 **Q: Who can benefit from OASP?**
 
-A: OASP is an open and collaborative security mechanism. Developers, security vendors, app stores, and device vendors -- all roles in the Android ecosystem can benefit from it. With OASP, developers can timely provide the app status information; security vendors can obtain a new repulation based malware detection factor; app stores can take down apps based on the ontime OASP status updates, and act as the OASP information hub; device vendors also gain an additional layer to verify app status, providing stronger protection for end users. In general, OASP aims to solve the private key leakage, product resale, certificate upgrade etc. problems, yet without introducing a new ecosystem central dependency.
+A: OASP is an open and collaborative security mechanism. Developers, security vendors, app stores, and device vendors -- all roles in the Android ecosystem can benefit from it. With OASP, developers can timely provide the app status information; security vendors can obtain a new reputation based malware detection factor; app stores can take down apps based on the real-time OASP status updates, and act as the OASP information hub; device vendors also gain an additional layer to verify app status, providing stronger protection for end users. In general, OASP aims to solve the private key leakage, product resale, certificate upgrade etc. problems, yet without introducing a new ecosystem central dependency.
 
 # License
 
