@@ -4,7 +4,7 @@ OASP's motivation and original design can be found in [our talk](mosec17.pdf) at
 
 But the implementation has been improved ever since. The figure below lists files of an APK with OASP signature.
 
-![OASPNormal](oasp_normal.png)
+![OASPNormal](oasp_normal.png | width=300)
 
 Files added by OASP are highlighted with callouts. A directory named as "META-INF-OASP" is added along with the traditional "META-INF" to store the OASP certificate and its meta info (which should at least contain the signing scheme version and the OASP url). The OASP signature corresponding to this OASP certificate is placed under the traditional "META-INF".
 
@@ -27,6 +27,6 @@ However, OASP itself continues to evolve. The verifier and the remote OASP serve
 
 Moreover, developers may need to deprecate old OASP certificates and upgrade to a new one. This has been taken into consideration during OASP's design. The figure below illustrates an APK that has historical versions signed by two deprecated OASP certificates.
 
-![OASPUpgrade](oasp_upgrade.png)
+![OASPUpgrade](oasp_upgrade.png | width=300)
 
 The verifier should check if the developer indeed owns the old certificates (by verifying the signatures with the same prefixes under the "META-INF/OASP-OLD" directory). Once passed, old versions of the APK signed by any of the old OASP certificates can be upgraded to this APK (assuming Android package installer is fine with other aspects of the APK). This design enables OASP to support cross-version upgrade.
