@@ -8,7 +8,9 @@ Based on the extra signature layer, we introduced OASP (Online App Status Protoc
 
 For background information, one can refer to [our talk](docs/mosec17.pdf) at [MOSEC 2017](http://mosec.org). For the most up-to-date design description, one can look at the [design documentation](docs/README.md).
 
-Also, please note that OASP is part of the OASES (Open AI System Security Alliance) projects. For more information about OASES, please visit its [website](https://oases.io).
+Also, please note that OASP is part of the OASES (Open AI System Security Alliance) projects. For more information about OASES, please visit its website:
+
+[![OASES](docs/oases.png)](https://oases.io)
 
 
 # Source Code Description
