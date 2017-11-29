@@ -53,13 +53,13 @@ The server should return the supported OASP protocol version, like '{"oasp_versi
 
 ```
 curl -X POST -d \
-		 '{ "apk_pkg":"com.yulong.app",
-			"apk_ver":1,
-			"apk_mf_hash":"C316183D78D89BFD2900E20FA90AB152AF21F89F0BF5C75749E14E743724C51F",
-			"apk_cert":"6951C2D4BCB3457FC50314D4D05D69DD72E90EDCB06CDE1D9EB7D09D413F4B4C",
-			"oasp_ver": 1,
-			"oasp_cert":"CF802C91235D125EF0BF311BD3A0CDD4EDCB8BEB4F1DED5A6E0A05A98D77047A"}' \
-		https://[OASP_SERVER]
+  '{ "apk_pkg":"com.yulong.app",
+     "apk_ver":1,
+     "apk_mf_hash":"C316183D78D89BFD2900E20FA90AB152AF21F89F0BF5C75749E14E743724C51F",
+     "apk_cert":"6951C2D4BCB3457FC50314D4D05D69DD72E90EDCB06CDE1D9EB7D09D413F4B4C",
+     "oasp_ver": 1,
+     "oasp_cert":"CF802C91235D125EF0BF311BD3A0CDD4EDCB8BEB4F1DED5A6E0A05A98D77047A"}' \
+  https://[OASP_SERVER]
 ```
 
 The server should return the OASP status code, like '{"oasp_result":1}'.
