@@ -6,7 +6,7 @@ So we proposed to add another layer of signature above the existing App signatur
 
 Based on the extra signature layer, we introduced OASP (Online App Status Protocol). App developers should carry OASP URLs (must be HTTPS) together with the OASP signature. Through this URL, everyone else in the ecosystem can query app information to the developers and verify whether the app is trustworthy or not. This makes possible to build an open collaborative platform where developers and device/security vendors are no longer isolated -- there will be no gap/barrier between them. 
 
-For more details, one can directly refer to [our talk](docs/mosec17.pdf) at [MOSEC 2017](http://mosec.org).
+For background information, one can refer to [our talk](docs/mosec17.pdf) at [MOSEC 2017](http://mosec.org). For the most up-to-date design description, one can look at the [design documentation](docs/README.md).
 
 Also, please note that OASP is part of the OASES (Open AI System Security Alliance) projects. For more information about OASES, please visit its [website](https://oases.io).
 
