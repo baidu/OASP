@@ -83,6 +83,6 @@ The code is under the BSD license. Please refer to the [LICENSE](LICENCE) file f
 
 ![BaiduXlabLogo](docs/baidu_xlab.png)
 
-[Yulong Zhang](ylzhang@baidu.com)
+[Yulong Zhang](mailto:ylzhang@baidu.com)
 
-[Lenx (Tao) Wei](lenx@baidu.com)
+[Lenx (Tao) Wei](mailto:lenx@baidu.com)
